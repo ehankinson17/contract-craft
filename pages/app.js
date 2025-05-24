@@ -7,9 +7,22 @@ export default function ContractCraft() {
 
   // Check login status when component loads
   useEffect(() => {
+<<<<<<< HEAD
     // Since we can't use localStorage in artifacts, simulate logged-in state
     setIsLoggedIn(true);
     setUserEmail('user@example.com');
+=======
+    const loggedIn = localStorage.getItem('isLoggedIn');
+    const email = localStorage.getItem('userEmail');
+    
+    if (loggedIn === 'true' && email) {
+      setIsLoggedIn(true);
+      setUserEmail(email);
+    } else {
+      // Redirect to login if not logged in
+      window.location.href = '/login';
+    }
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
   }, []);
 
   // App state
@@ -18,8 +31,11 @@ export default function ContractCraft() {
   const [contractType, setContractType] = useState('');
   const [aiAnalysis, setAiAnalysis] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+<<<<<<< HEAD
   const [fileText, setFileText] = useState('');
   const [uploadProgress, setUploadProgress] = useState('');
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
   const fileInputRef = useRef(null);
 
   const contractTypes = [
@@ -30,6 +46,7 @@ export default function ContractCraft() {
     { value: 'other', label: 'Other', icon: '📝' }
   ];
 
+<<<<<<< HEAD
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -145,17 +162,91 @@ export default function ContractCraft() {
 
   const handleAnalyze = () => {
     if (!uploadedFile || !contractType || !fileText) return;
+=======
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setUploadedFile(file);
+    }
+  };
+
+  const handleAnalyze = () => {
+    if (!uploadedFile || !contractType) return;
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
     
     setIsAnalyzing(true);
     
     setTimeout(() => {
+<<<<<<< HEAD
       // Analyze the actual file content
       const analysis = analyzeContractContent(fileText, contractType, uploadedFile.name);
       setAiAnalysis(analysis);
+=======
+      const results = {
+        nda: {
+          score: 85,
+          risks: [
+            { type: 'Medium', issue: 'Definition of confidential information could be more specific' },
+            { type: 'Low', issue: 'No mutual confidentiality provisions' }
+          ],
+          suggestions: [
+            'Add specific exclusions for publicly available information',
+            'Include return/destruction of confidential materials clause'
+          ]
+        },
+        msa: {
+          score: 72,
+          risks: [
+            { type: 'High', issue: 'Unlimited liability exposure detected' },
+            { type: 'Medium', issue: 'Auto-renewal clause may lock you in' }
+          ],
+          suggestions: [
+            'Add liability cap equal to 12 months of fees',
+            'Require 60-day notice for non-renewal'
+          ]
+        },
+        sow: {
+          score: 78,
+          risks: [
+            { type: 'High', issue: 'Scope creep risk - deliverables not clearly defined' },
+            { type: 'Medium', issue: 'Payment milestones tied to subjective approvals' }
+          ],
+          suggestions: [
+            'Define specific, measurable deliverables',
+            'Add change order process for scope changes'
+          ]
+        },
+        order: {
+          score: 88,
+          risks: [
+            { type: 'Medium', issue: 'No cancellation policy specified' },
+            { type: 'Low', issue: 'Shipping terms could be more favorable' }
+          ],
+          suggestions: [
+            'Add cancellation window and fees',
+            'Negotiate FOB destination terms'
+          ]
+        },
+        other: {
+          score: 75,
+          risks: [
+            { type: 'High', issue: 'Contract type unclear - may affect enforceability' },
+            { type: 'Medium', issue: 'Standard legal provisions missing' }
+          ],
+          suggestions: [
+            'Clarify the nature and purpose of agreement',
+            'Add standard force majeure clause'
+          ]
+        }
+      };
+
+      setAiAnalysis(results[contractType] || results.other);
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
       setIsAnalyzing(false);
     }, 3000);
   };
 
+<<<<<<< HEAD
   // Enhanced content analysis function for PDFs
   const analyzeContractContent = (content, type, filename) => {
     const text = content.toLowerCase();
@@ -400,10 +491,13 @@ export default function ContractCraft() {
     };
   };
 
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
   const resetForm = () => {
     setUploadedFile(null);
     setContractType('');
     setAiAnalysis(null);
+<<<<<<< HEAD
     setFileText('');
     setUploadProgress('');
   };
@@ -411,6 +505,14 @@ export default function ContractCraft() {
   const handleLogout = () => {
     // In a real app, this would clear auth state
     setIsLoggedIn(false);
+=======
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userEmail');
+    window.location.href = '/';
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
   };
 
   // Show loading while checking login
@@ -508,7 +610,11 @@ export default function ContractCraft() {
                 { title: 'Active Contracts', value: '12', icon: '📄' },
                 { title: 'Pending Review', value: '3', icon: '⏰' },
                 { title: 'Completed', value: '28', icon: '✅' },
+<<<<<<< HEAD
                 { title: 'PDF Documents', value: '15', icon: '📑' }
+=======
+                { title: 'Attorney Hours', value: '18/24', icon: '👥' }
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
               ].map((stat, index) => (
                 <div key={index} style={{ 
                   backgroundColor: 'white', 
@@ -601,11 +707,14 @@ export default function ContractCraft() {
                     <p style={{ fontSize: '14px', color: '#64748b', margin: 0 }}>
                       PDF, DOC, DOCX, TXT up to 10MB
                     </p>
+<<<<<<< HEAD
                     {uploadProgress && (
                       <p style={{ fontSize: '14px', color: '#2563eb', marginTop: '8px', fontWeight: '500' }}>
                         {uploadProgress}
                       </p>
                     )}
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -614,6 +723,7 @@ export default function ContractCraft() {
                       onChange={handleFileUpload}
                     />
                   </div>
+<<<<<<< HEAD
                   {fileText && (
                     <div style={{ marginTop: '12px', padding: '12px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                       <p style={{ fontSize: '14px', color: '#059669', margin: 0 }}>
@@ -628,25 +738,42 @@ export default function ContractCraft() {
                       </p>
                     </div>
                   )}
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                 </div>
 
                 {/* Analyze Button */}
                 <button
                   onClick={handleAnalyze}
+<<<<<<< HEAD
                   disabled={!uploadedFile || !contractType || isAnalyzing || !fileText}
                   style={{
                     width: '100%',
                     padding: '16px',
                     backgroundColor: (!uploadedFile || !contractType || isAnalyzing || !fileText) ? '#d1d5db' : '#2563eb',
+=======
+                  disabled={!uploadedFile || !contractType || isAnalyzing}
+                  style={{
+                    width: '100%',
+                    padding: '16px',
+                    backgroundColor: (!uploadedFile || !contractType || isAnalyzing) ? '#d1d5db' : '#2563eb',
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                     color: 'white',
                     border: 'none',
                     borderRadius: '8px',
                     fontSize: '16px',
                     fontWeight: '600',
+<<<<<<< HEAD
                     cursor: (!uploadedFile || !contractType || isAnalyzing || !fileText) ? 'not-allowed' : 'pointer'
                   }}
                 >
                   {isAnalyzing ? '🤖 Analyzing PDF Document...' : '🚀 Start Smart Analysis'}
+=======
+                    cursor: (!uploadedFile || !contractType || isAnalyzing) ? 'not-allowed' : 'pointer'
+                  }}
+                >
+                  {isAnalyzing ? '🤖 Analyzing...' : '🚀 Start AI Analysis'}
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                 </button>
               </div>
 
@@ -657,8 +784,13 @@ export default function ContractCraft() {
                 {isAnalyzing ? (
                   <div style={{ textAlign: 'center', padding: '40px 0' }}>
                     <div style={{ fontSize: '48px', marginBottom: '16px' }}>🤖</div>
+<<<<<<< HEAD
                     <p style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>Analyzing your PDF contract...</p>
                     <p style={{ fontSize: '14px', color: '#64748b' }}>Extracting and analyzing document content</p>
+=======
+                    <p style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>Analyzing your contract...</p>
+                    <p style={{ fontSize: '14px', color: '#64748b' }}>This usually takes 30-60 seconds</p>
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                   </div>
                 ) : aiAnalysis ? (
                   <div>
@@ -669,12 +801,17 @@ export default function ContractCraft() {
                         <div>
                           <p style={{ fontWeight: '600', margin: '0 0 4px 0' }}>Contract Risk Score</p>
                           <p style={{ fontSize: '14px', color: '#64748b', margin: 0 }}>
+<<<<<<< HEAD
                             {aiAnalysis.riskLevel} - Based on PDF content analysis
+=======
+                            {aiAnalysis.score >= 85 ? 'Low Risk' : aiAnalysis.score >= 70 ? 'Medium Risk' : 'High Risk'}
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                           </p>
                         </div>
                       </div>
                     </div>
 
+<<<<<<< HEAD
                     {/* Key Findings */}
                     {aiAnalysis.keyFindings && (
                       <div style={{ marginBottom: '24px' }}>
@@ -690,6 +827,8 @@ export default function ContractCraft() {
                       </div>
                     )}
 
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                     {/* Risks */}
                     <div style={{ marginBottom: '24px' }}>
                       <h4 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#1e293b' }}>Key Issues Found</h4>
@@ -705,13 +844,17 @@ export default function ContractCraft() {
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                             <span>{risk.type === 'High' ? '🔴' : risk.type === 'Medium' ? '🟡' : '🔵'}</span>
                             <span style={{ fontWeight: '600', fontSize: '14px' }}>{risk.type} Risk</span>
+<<<<<<< HEAD
                             <span style={{ fontSize: '12px', color: '#64748b' }}>({risk.section})</span>
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                           </div>
                           <p style={{ fontSize: '14px', margin: 0, color: '#374151' }}>{risk.issue}</p>
                         </div>
                       ))}
                     </div>
 
+<<<<<<< HEAD
                     {/* Redlines */}
                     {aiAnalysis.redlines && aiAnalysis.redlines.length > 0 && (
                       <div style={{ marginBottom: '24px' }}>
@@ -731,6 +874,8 @@ export default function ContractCraft() {
                       </div>
                     )}
 
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                     {/* Suggestions */}
                     <div>
                       <h4 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#1e293b' }}>Recommendations</h4>
@@ -776,7 +921,11 @@ export default function ContractCraft() {
                   <div style={{ textAlign: 'center', padding: '40px 0', color: '#64748b' }}>
                     <div style={{ fontSize: '48px', marginBottom: '16px' }}>📊</div>
                     <p style={{ fontSize: '16px', fontWeight: '500' }}>Ready to analyze your contract</p>
+<<<<<<< HEAD
                     <p style={{ fontSize: '14px' }}>Upload a document and select contract type to begin intelligent analysis</p>
+=======
+                    <p style={{ fontSize: '14px' }}>Select contract type and upload file to begin</p>
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
                   </div>
                 )}
               </div>

@@ -1,9 +1,13 @@
 import { useState } from 'react';
+<<<<<<< HEAD
 import { validateLogin } from './users';
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+<<<<<<< HEAD
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,13 +24,28 @@ export default function Login() {
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('userEmail', result.user.email);
       localStorage.setItem('userName', result.user.name);
+=======
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    
+    // Super simple login - just check if they entered something
+    if (email && password) {
+      // Store login status
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', email);
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
       
       // Redirect to app
       window.location.href = '/app';
     } else {
+<<<<<<< HEAD
       // Show error message
       setError(result.error);
       setIsLoading(false);
+=======
+      alert('Please enter email and password');
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
     }
   };
 
@@ -57,7 +76,10 @@ export default function Login() {
                 boxSizing: 'border-box'
               }}
               placeholder="Enter your email"
+<<<<<<< HEAD
               required
+=======
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
             />
           </div>
 
@@ -78,6 +100,7 @@ export default function Login() {
                 boxSizing: 'border-box'
               }}
               placeholder="Enter your password"
+<<<<<<< HEAD
               required
             />
           </div>
@@ -102,17 +125,35 @@ export default function Login() {
             style={{
               width: '100%',
               backgroundColor: isLoading ? '#d1d5db' : '#2563eb',
+=======
+            />
+          </div>
+
+          <button
+            type="submit"
+            style={{
+              width: '100%',
+              backgroundColor: '#2563eb',
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
               color: 'white',
               padding: '12px',
               border: 'none',
               borderRadius: '6px',
               fontSize: '16px',
               fontWeight: '600',
+<<<<<<< HEAD
               cursor: isLoading ? 'not-allowed' : 'pointer',
               marginBottom: '16px'
             }}
           >
             {isLoading ? 'Signing In...' : 'Sign In'}
+=======
+              cursor: 'pointer',
+              marginBottom: '16px'
+            }}
+          >
+            Sign In
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
           </button>
         </form>
 
@@ -134,7 +175,11 @@ export default function Login() {
 
         <div style={{ marginTop: '24px', padding: '16px', backgroundColor: '#f0f9ff', borderRadius: '8px', border: '1px solid #e0f2fe' }}>
           <p style={{ fontSize: '12px', color: '#0369a1', margin: 0, textAlign: 'center' }}>
+<<<<<<< HEAD
             <strong>Secure Access:</strong> Only authorized users can access Contract Craft
+=======
+            <strong>Demo:</strong> Enter any email and password to access the app
+>>>>>>> a1188392429c2e4ab96a145c05dcb979a0e9e84c
           </p>
         </div>
       </div>
