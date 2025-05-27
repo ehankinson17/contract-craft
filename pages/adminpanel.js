@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addUser, getAllUsers, deleteUser, isAdmin } from './users';
+import { addUser, getAllUsers, deleteUser, isAdmin } from '../data/users';
 
 export default function AdminPanel() {
   const [users, setUsers] = useState([]);
