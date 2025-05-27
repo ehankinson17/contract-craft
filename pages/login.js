@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { validateLogin } from './users';
-
+import { validateLogin } from '../data/users';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
