@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Header from '../components/header';
-import Navigation from '../components/navigation';
-import Dashboard from '../components/dashboard';
+import Header from '../components/Header';
+import Navigation from '../components/Navigation';
+import Dashboard from '../components/Dashboard';
 import ChatInterface from '../components/ChatInterface.js';
-import Contracts from '../components/contracts';
+import Contracts from '../components/Contracts';
 import WordDocument from '../components/WordDocument.js';
 
 
