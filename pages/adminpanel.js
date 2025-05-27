@@ -17,8 +17,13 @@ export default function AdminPanel() {
   });
 
   // Get current admin email from localStorage
-  const adminEmail = localStorage.getItem('userEmail');
+  const [adminEmail, setAdminEmail] = useState("");
 
+  // Get admin email from localStorage on component mount
+  useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+    setAdminEmail(email || "");
+  }, []);
   // Check if current user is admin
   useEffect(() => {
     if (!adminEmail || !isAdmin(adminEmail)) {
