@@ -1,0 +1,84 @@
+  const downloadDocument = async () => {
+    const paragraphs = [];
+    
+    // Add title
+    paragraphs.push(
+      new Paragraph({
+        children: [new TextRun({ text: "STATEMENT OF WORK", bold: true, size: 32 })],
+        alignment: AlignmentType.CENTER,
+      })
+    );
+    
+    paragraphs.push(new Paragraph({ children: [new TextRun("")] }));
+    
+    // Add header info
+    paragraphs.push(new Paragraph({ children: [new TextRun({ text: "Client: Acme Corporation", bold: true })] }));
+    paragraphs.push(new Paragraph({ children: [new TextRun({ text: "Vendor: SmartCloud Inc.", bold: true })] }));
+    paragraphs.push(new Paragraph({ children: [new TextRun({ text: "Date: March 1, 2025", bold: true })] }));
+    paragraphs.push(new Paragraph({ children: [new TextRun("")] }));
+
+    // Process each section with track changes
+    analysis.redlinedContent.forEach((section, sectionIndex) => {
+      paragraphs.push(
+        new Paragraph({
+          children: [new TextRun({ text: section.section, bold: true, size: 28 })],
+        })
+      );
+
+      const tokens = parseTokens(section.redlined, sectionIndex);
+      const textRuns = [];
+
+      tokens.forEach(token => {
+        if (token.type === 'text') {
+          textRuns.push(new TextRun({ text: token.content }));
+        } else if (token.type === 'addition') {
+          // Blue underlined for additions (like Word track changes)
+          textRuns.push(new TextRun({ 
+            text: token.content,
+            color: "0066CC",
+            underline: {}
+          }));
+        } else if (token.type === 'strikethrough') {
+          // Red strikethrough for deletions (like Word track changes)
+          textRuns.push(new TextRun({ 
+            text: token.content,
+            color: "CC0000",
+            strike: true
+          }));
+        }
+      });
+
+      if (textRuns.length > 0) {
+        paragraphs.push(new Paragraph({ children: textRuns }));
+      }
+      
+      paragraphs.push(new Paragraph({ children: [new TextRun("")] }));
+    });
+
+    // Create and download the Word document
+    const doc = new Document({
+      sections: [{
+        properties: {},
+        children: paragraphs,
+      }],
+    });
+
+    try {
+      const buffer = await Packer.toBuffer(doc);
+      const blob = new Blob([buffer], { 
+        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
+      });
+      
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Contract-${new Date().toISOString().slice(0, 10)}.docx`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error creating Word document:', error);
+      alert('Error creating Word document. Please try again.');
+    }
+  };

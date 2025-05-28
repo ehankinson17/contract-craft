@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
-import Dashboard from '../components/Dashboard';
+import Header from '../components/Header.js';
+import Navigation from '../components/Navigation.js';
+import Dashboard from '../components/Dashboard.js';
 import ChatInterface from '../components/ChatInterface.js';
 import Contracts from '../components/Contracts';
 import WordDocument from '../components/WordDocument.js';
+import AdminPanel from './adminpanel';import { isAdmin } from '../data/users';
 
 
 export default function ContractCraft() {
@@ -340,7 +341,7 @@ export default function ContractCraft() {
  return (
    <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc' }}>
      <Header userEmail={userEmail} onLogout={handleLogout} />
-     <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+     <Navigation activeTab={activeTab} onTabChange={setActiveTab} isAdmin={isAdmin(userEmail)} />
 
 
      {/* Main Content */}
@@ -655,8 +656,12 @@ export default function ContractCraft() {
        {activeTab === 'previous-contracts' && (
          <Contracts />
        )}
+
+       {/* Admin Panel */}
+       {activeTab === 'admin' && (
+         <AdminPanel />
+       )}
      </main>
    </div>
  );
 }
-

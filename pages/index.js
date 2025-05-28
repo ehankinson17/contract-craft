@@ -56,7 +56,7 @@ export default function Landing() {
             AI-Powered Commercial Contract Review for Growing Businesses
           </h1>
           <p style={{ fontSize: '20px', color: '#64748b', marginBottom: '40px', lineHeight: '1.6' }}>
-            Get professional analysis of your commercial contracts immediately. Our AI reviews NDAs, MSAs, SOWs, and more—with attorney backup when you need it.
+            Get professional AI analysis and edits of your commercial contracts in seconds. Our AI reviews NDAs, MSAs, SOWs, and more - with attorney backup when you need it.
           </p>
           <button 
             onClick={() => window.location.href = '/login'}
@@ -145,7 +145,7 @@ export default function Landing() {
             }}>
               <div style={{ fontSize: '48px', marginBottom: '16px' }}>⚡</div>
               <h3 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px', color: '#1e293b' }}>Commercial Contract Types</h3>
-              <p style={{ fontSize: '16px', color: '#64748b', lineHeight: '1.5' }}>NDAs, MSAs, SOWs, Order Forms, and more. Each analysis is tailored to your specific commercial contract type.</p>
+              <p style={{ fontSize: '16px', color: '#64748b', lineHeight: '1.5' }}>NDAs, MSAs, SOWs, Order Forms, and more. The AI uses best practices, then allows you to decide what to keep or ignore.</p>
             </div>
 
             <div style={{ 
@@ -180,24 +180,47 @@ export default function Landing() {
       {/* Customer Section */}
       <section style={{ padding: '60px 24px', backgroundColor: '#f8fafc' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#64748b', marginBottom: '32px' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#64748b', marginBottom: '40px' }}>
             Trusted by Growing Tech Companies
           </h3>
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ 
-              backgroundColor: 'white', 
-              padding: '24px 48px', 
-              borderRadius: '12px', 
-              border: '1px solid #e2e8f0',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#2563eb' }}>
-                Faros.ai
-              </div>
-              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>
-                Engineering Intelligence Platform
-              </div>
+          
+          {/* Faros Logo */}
+          <div style={{ 
+            backgroundColor: 'white', 
+            padding: '32px', 
+            borderRadius: '16px', 
+            border: '1px solid #e2e8f0',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+            marginBottom: '32px'
+          }}>
+            <img 
+              src="https://cdn.prod.website-files.com/66f2fa250759eeb1f2b1199a/66fc7b97858a6ec9363636f9_faros-ai-navbar-logo.svg"
+              alt="Faros AI Logo"
+              style={{ 
+                height: '48px',
+                marginBottom: '12px'
+              }}
+            />
+            <div style={{ fontSize: '14px', color: '#64748b' }}>
+              Engineering Intelligence Platform
             </div>
+          </div>
+
+          {/* Testimonial Quote */}
+          <blockquote style={{ 
+            fontSize: '20px', 
+            fontStyle: 'italic', 
+            color: '#374151', 
+            lineHeight: '1.6',
+            maxWidth: '600px',
+            margin: '0 auto 24px',
+            padding: '0 20px'
+          }}>
+            "Contract Craft has saved me more than $4,500 per month and, more importantly, made my sales team self-sufficient and faster."
+          </blockquote>
+          
+          <div style={{ fontSize: '16px', fontWeight: '600', color: '#1e293b' }}>
+            Vitaly Gordon, CEO
           </div>
         </div>
       </section>

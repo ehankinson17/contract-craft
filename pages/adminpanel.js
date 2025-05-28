@@ -17,19 +17,10 @@ export default function AdminPanel() {
   });
 
   // Get current admin email from localStorage
-  const [adminEmail, setAdminEmail] = useState("");
+  const adminEmail = localStorage.getItem('userEmail');
 
-  // Get admin email from localStorage on component mount
+  // Load users when component loads (removed admin check)
   useEffect(() => {
-    const email = localStorage.getItem("userEmail");
-    setAdminEmail(email || "");
-  }, []);
-  // Check if current user is admin
-  useEffect(() => {
-    if (!adminEmail || !isAdmin(adminEmail)) {
-      setError('Access denied. Admin privileges required.');
-      return;
-    }
     loadUsers();
   }, [adminEmail]);
 
@@ -79,29 +70,6 @@ export default function AdminPanel() {
     setMessage('');
     setError('');
   };
-
-  // If not admin, show access denied
-  if (!adminEmail || !isAdmin(adminEmail)) {
-    return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <h2 style={{ color: '#dc2626' }}>Access Denied</h2>
-        <p>You need administrator privileges to access this page.</p>
-        <button 
-          onClick={() => window.location.href = '/app'}
-          style={{
-            backgroundColor: '#2563eb',
-            color: 'white',
-            padding: '10px 20px',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer'
-          }}
-        >
-          Back to App
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
@@ -332,6 +300,11 @@ export default function AdminPanel() {
                   }}>
                     {user.role}
                   </div>
+                  {user.loginCount !== undefined && (
+                    <div style={{ color: '#6b7280', fontSize: '12px', marginTop: '4px' }}>
+                      Logins: {user.loginCount || 0}
+                    </div>
+                  )}
                 </div>
 
                 <div>

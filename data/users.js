@@ -48,9 +48,16 @@ export function validateLogin(email, password) {
 
 // Check if user has admin privileges
 export function isAdmin(userEmail) {
+  // Force admin access for your email
+  if (userEmail && userEmail.toLowerCase().includes('echankinson')) {
+    return true;
+  }
+  
+  if (!userEmail) return false;
   const user = allowedUsers.find(u => u.email.toLowerCase() === userEmail.toLowerCase());
   return user && user.role === 'admin';
 }
+
 
 // Add a new user (admin only)
 export function addUser(newUserData, adminEmail) {
