@@ -7,6 +7,7 @@ export default function AdminPanel() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [adminEmail, setAdminEmail] = useState('');
   
   // New user form data
   const [newUser, setNewUser] = useState({
@@ -16,12 +17,18 @@ export default function AdminPanel() {
     role: 'user'
   });
 
-  // Get current admin email from localStorage
-  const adminEmail = localStorage.getItem('userEmail');
-
-  // Load users when component loads (removed admin check)
+  // Get current admin email from localStorage (browser only)
   useEffect(() => {
-    loadUsers();
+    if (typeof window !== 'undefined') {
+      setAdminEmail(localStorage.getItem('userEmail') || '');
+    }
+  }, []);
+
+  // Load users when component loads and adminEmail is set
+  useEffect(() => {
+    if (adminEmail) {
+      loadUsers();
+    }
   }, [adminEmail]);
 
   const loadUsers = () => {
@@ -71,12 +78,26 @@ export default function AdminPanel() {
     setError('');
   };
 
+  // Show loading if adminEmail hasn't been loaded yet
+  if (!adminEmail) {
+    return (
+      <div style={{ padding: '20px', textAlign: 'center' }}>
+        <div style={{ fontSize: '48px', marginBottom: '16px' }}>⏳</div>
+        <p style={{ fontSize: '16px', color: '#64748b' }}>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
         <h1 style={{ color: '#1e293b', fontSize: '28px' }}>User Management</h1>
         <button 
-          onClick={() => window.location.href = '/app'}
+          onClick={() => {
+            if (typeof window !== 'undefined') {
+              window.location.href = '/app';
+            }
+          }}
           style={{
             backgroundColor: '#6b7280',
             color: 'white',
